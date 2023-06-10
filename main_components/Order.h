@@ -24,6 +24,8 @@ public:
             orderId), products(products), customerName(customerName), orderDate(getCurrentDateTime())
             {}
 
+    Order() {}
+
     const std::string &getOrderId() const { return orderId; }
 
     const std::vector<Product> &getProducts() const { return products; }
