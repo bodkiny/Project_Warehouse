@@ -27,6 +27,15 @@ public:
 
     int getQuantity() const { return quantity; }
     void setQuantity(int quantity) { Product::quantity = quantity; }
+
+    friend std::ostream& operator<<(std::ostream &os, const Product &p){
+        os << "Product id: " << p.productId << std::endl;
+        os << "Product name: " << p.name << std::endl;
+        os << "Price id: " << p.price << std::endl;
+        os << "Quantity in stock: " << p.quantity << std::endl;
+
+        return os;
+    }
 };
 
 
