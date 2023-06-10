@@ -16,7 +16,7 @@ public:
     : productId(productId), name(name), price(price), quantity(quantity)
     {}
 
-    Product() {}
+    Product() = default;
 
     const std::string &getProductId() const { return productId; }
     void setProductId(const std::string &productId) { Product::productId = productId; }

@@ -24,7 +24,7 @@ public:
             orderId), products(products), customerName(customerName), orderDate(getCurrentDateTime())
             {}
 
-    Order() {}
+    Order() = default;
 
     const std::string &getOrderId() const { return orderId; }
 
