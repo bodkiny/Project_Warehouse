@@ -5,32 +5,44 @@
 #include <map>
 #include "Product.h"
 #include "Order.h"
+#include "../interfaces/IProductRepository.h"
+#include "../interfaces/IOrderRepository.h"
 
 class Warehouse {
 private:
-    std::map<std::string, Product> products;
-    std::map<std::string, Order> orders;
+    IProductRepository& productRepository;
+    IOrderRepository& orderRepository;
 
 public:
-    Warehouse(const std::map<std::string, Product> &products, const std::map<std::string, Order> &orders)
-    : products(products), orders(orders)
+    Warehouse(IProductRepository &productRepository, IOrderRepository &orderRepository)
+    : productRepository(productRepository), orderRepository(orderRepository)
     {}
 
-    Warehouse() = default;
+    void addProduct(const Product& product) {
+        productRepository.addProduct(product);
+    }
+    void removeProduct(const std::string& productId) {
+        productRepository.removeProduct(productId);
+    }
+    std::optional<Product> getProduct(const std::string& productId) const {
+        return productRepository.getProduct(productId);
+    }
+    std::map<std::string, Product>& getAllProducts() const {
+        return productRepository.getAllProducts();
+    }
 
-    const std::map<std::string, Product> &getProducts() const { return products; }
-    void setProducts(const std::map<std::string, Product> &products) { Warehouse::products = products; }
-
-    const std::map<std::string, Order> &getOrders() const { return orders; }
-    void setOrders(const std::map<std::string, Order> &orders) { Warehouse::orders = orders; }
-
-    void addProduct(const Product& product) { products[product.getProductId()] = product; }
-    void removeProduct(const std::string& productId) { products.erase(productId); }
-    const Product& getProduct(const std::string& productId) const { return products.at(productId); }
-
-    void addOrder(const Order& order) { orders[order.getOrderId()] = order; }
-    void removeOrder(const std::string& orderId) { orders.erase(orderId); }
-    const Order& getOrder(const std::string& orderId) const { return orders.at(orderId); }
+    void addOrder(const Order& order) {
+        orderRepository.addOrder(order);
+    }
+    void removeOrder(const std::string& orderId) {
+        orderRepository.removeOrder(orderId);
+    }
+    std::optional<Order> getOrder(const std::string& orderId) const {
+        return orderRepository.getOrder(orderId);
+    }
+    std::map<std::string, Order>& getAllOrders() const {
+        return orderRepository.getAllOrders();
+    }
 };
 
 
