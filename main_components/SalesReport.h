@@ -1,0 +1,14 @@
+//
+// Created by USER on 10.06.2023.
+//
+
+#ifndef PROJECT_WAREHOUSE_SALESREPORT_H
+#define PROJECT_WAREHOUSE_SALESREPORT_H
+
+
+class SalesReport {
+
+};
+
+
+#endif //PROJECT_WAREHOUSE_SALESREPORT_H
