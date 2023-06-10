@@ -34,7 +34,7 @@ public:
 
     const std::chrono::system_clock::time_point& getOrderDate() const { return orderDate; }
 
-    void showProducts(){
+    void showProducts() const{
         for (const auto &item: products){
             std::cout << item << std::endl;
         }
@@ -54,6 +54,27 @@ public:
         }
 
         return os;
+    }
+
+    std::string toString() const {
+        std::ostringstream oss;
+        std::time_t orderTime = std::chrono::system_clock::to_time_t(orderDate);
+        oss << "Order ID: " << orderId << "\n"
+            << "Customer Name: " << customerName << "\n"
+            << "Order Date: " << std::put_time(std::localtime(&orderTime), "%Y-%m-%d %H:%M:%S") << "\n";
+
+        std::cout << "Do you want to view ordered products? (press \"y\" or \"n\"): ";
+        char option;
+        std::cin >> option;
+        if(option == 'y'){
+            oss << "Products:\n";
+            for (int i = 0; i < products.size(); ++i) {
+                oss << "Item#" << i + 1 << std::endl;
+                oss << products[i] << std::endl;
+            }
+        }
+
+        return oss.str();
     }
 };
 

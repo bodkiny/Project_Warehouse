@@ -38,6 +38,15 @@ public:
 
         return os;
     }
+
+    std::string toString() const {
+        std::ostringstream oss;
+        oss << "Product ID: " << productId << "\n"
+            << "Name: " << name << "\n"
+            << "Price: " << price << "\n"
+            << "Quantity: " << quantity << "\n";
+        return oss.str();
+    }
 };
 
 
