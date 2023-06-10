@@ -3,15 +3,15 @@
 
 #include <string>
 #include <optional>
-#include <vector>
+#include <map>
 #include "../main_components/Product.h"
 
 class IProductRepository {
 public:
     virtual void addProduct(const Product& product) = 0;
-    virtual void removeProduct(const std::string& productName) = 0;
-    virtual std::optional<Product> getProduct(const std::string& productName) = 0;
-    virtual std::vector<Product> getAllProducts() = 0;
+    virtual void removeProduct(const std::string& productId) = 0;
+    virtual std::optional<Product> getProduct(const std::string& productId) = 0;
+    virtual std::map<std::string, Product>& getAllProducts() = 0;
 
     virtual ~IProductRepository() = default;
 };
