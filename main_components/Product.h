@@ -16,6 +16,8 @@ public:
     : productId(productId), name(name), price(price), quantity(quantity)
     {}
 
+    Product() {}
+
     const std::string &getProductId() const { return productId; }
     void setProductId(const std::string &productId) { Product::productId = productId; }
 
@@ -32,7 +34,7 @@ public:
         os << "Product id: " << p.productId << std::endl;
         os << "Product name: " << p.name << std::endl;
         os << "Price id: " << p.price << std::endl;
-        os << "Quantity in stock: " << p.quantity << std::endl;
+        os << "Quantity: " << p.quantity << std::endl;
 
         return os;
     }
