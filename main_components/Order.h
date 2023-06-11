@@ -36,6 +36,16 @@ public:
 
     const std::chrono::system_clock::time_point& getOrderDate() const { return orderDate; }
 
+    std::string getOrderDateStringValue() const {
+        std::time_t time = std::chrono::system_clock::to_time_t(orderDate);
+        std::tm* timeinfo = std::localtime(&time);
+
+        std::ostringstream oss;
+        oss << std::put_time(timeinfo, "%Y-%m-%d %H:%M:%S");
+
+        return oss.str();
+    }
+
     void showProducts() const{
         for (const auto &item: products){
             std::cout << item << std::endl;
