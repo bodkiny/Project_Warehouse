@@ -47,8 +47,15 @@ public:
     }
 
     void showProducts() const{
-        for (const auto &item: products){
-            std::cout << item << std::endl;
+        if (products.empty()) {
+            std::cout << "The order contains no products." << std::endl;
+        }else{
+            int i = 1;
+            for (const auto &item: products){
+                std::cout << "Product#" << i << std::endl;
+                std::cout << item << std::endl;
+                i++;
+            }
         }
     }
 
