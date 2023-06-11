@@ -10,6 +10,7 @@
 
 class Order {
 private:
+    static int orderCounter;
     std::string orderId;
     std::vector<Product> products;
     std::string customerName;
@@ -20,9 +21,10 @@ private:
     }
 
 public:
-    Order(const std::string &orderId, const std::vector<Product> &products, const std::string &customerName) : orderId(
-            orderId), products(products), customerName(customerName), orderDate(getCurrentDateTime())
-            {}
+    Order(const std::vector<Product> &products, const std::string &customerName) : products(products), customerName(customerName), orderDate(getCurrentDateTime()){
+                orderId = std::to_string(orderCounter);
+                orderCounter++;
+            }
 
     Order() = default;
 
@@ -77,6 +79,8 @@ public:
         return oss.str();
     }
 };
+
+int Order::orderCounter = 0;
 
 
 #endif
