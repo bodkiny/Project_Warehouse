@@ -47,6 +47,10 @@ public:
             << "Quantity: " << quantity << "\n";
         return oss.str();
     }
+
+    const void decreaseQuantity(int decreaseValue){
+        quantity -= decreaseValue;
+    }
 };
 
 
