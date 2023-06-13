@@ -28,6 +28,10 @@ public:
         return orders;
     }
 
+    void addAllOrders(const std::map<std::string, Order> &orders) override {
+        this->orders = orders;
+    }
+
     ~InMemoryOrderRepository() override = default;
 };
 

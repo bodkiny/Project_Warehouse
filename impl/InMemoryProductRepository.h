@@ -29,6 +29,10 @@ public:
         return products;
     }
 
+    void addAllProducts(const std::map<std::string, Product> &products) override {
+        this->products = products;
+    }
+
     ~InMemoryProductRepository() override = default;
 };
 
