@@ -3,6 +3,8 @@
 
 
 #include <string>
+#include <iostream>
+#include <sstream>
 
 class Product {
 private:
