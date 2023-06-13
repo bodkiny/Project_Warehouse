@@ -11,6 +11,7 @@
 #include "../interfaces/IUI.h"
 #include "../interfaces/IProductGenerator.h"
 #include "../interfaces/IOrderGenerator.h"
+#include "../interfaces/ISerializer.h"
 
 class Warehouse {
 private:
@@ -19,12 +20,13 @@ private:
     IUI& ui;
     IProductGenerator& productGenerator;
     IOrderGenerator& orderGenerator;
+    ISerializer& serializer;
 
 public:
     Warehouse(IProductRepository &productRepository, IOrderRepository &orderRepository, IUI &ui,
-              IProductGenerator& productGenerator, IOrderGenerator& orderGenerator)
+              IProductGenerator& productGenerator, IOrderGenerator& orderGenerator, ISerializer& serializer)
     : productRepository(productRepository), orderRepository(orderRepository), ui(ui),
-    productGenerator(productGenerator), orderGenerator(orderGenerator)
+    productGenerator(productGenerator), orderGenerator(orderGenerator), serializer(serializer)
     {}
 
     void addProductToStock(const Product& product) {
@@ -193,6 +195,11 @@ public:
             }
         }
     }
+
+    void serialize(const Warehouse& warehouse){
+        serializer.serialize(warehouse);
+    }
+
 };
 
 
