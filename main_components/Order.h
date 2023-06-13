@@ -36,6 +36,26 @@ public:
 
     const std::chrono::system_clock::time_point& getOrderDate() const { return orderDate; }
 
+    static void setOrderCounter(int orderCounter) {
+        Order::orderCounter = orderCounter;
+    }
+
+    void setOrderId(const std::string &orderId) {
+        Order::orderId = orderId;
+    }
+
+    void setProducts(const std::vector<Product> &products) {
+        Order::products = products;
+    }
+
+    void setCustomerName(const std::string &customerName) {
+        Order::customerName = customerName;
+    }
+
+    void setOrderDate(std::chrono::system_clock::time_point orderDate) {
+        Order::orderDate = orderDate;
+    }
+
     std::string getOrderDateStringValue() const {
         std::time_t time = std::chrono::system_clock::to_time_t(orderDate);
         std::tm* timeinfo = std::localtime(&time);
