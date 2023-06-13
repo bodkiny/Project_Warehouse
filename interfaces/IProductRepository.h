@@ -9,6 +9,7 @@
 class IProductRepository {
 public:
     virtual void addProduct(const Product& product) = 0;
+    virtual void addAllProducts(const std::map<std::string, Product>& products) = 0;
     virtual void removeProduct(const std::string& productId) = 0;
     virtual std::optional<Product> getProduct(const std::string& productId) = 0;
     virtual std::map<std::string, Product>& getAllProducts() = 0;
