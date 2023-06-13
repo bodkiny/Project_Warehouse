@@ -7,7 +7,7 @@
 
 class IDeserializer {
 public:
-    virtual Warehouse deserialize(const std::string& filePath) = 0;
+    virtual void deserialize(Warehouse& warehouse) = 0;
 
     virtual ~IDeserializer() = default;
 };
