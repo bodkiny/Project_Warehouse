@@ -12,6 +12,7 @@
 #include "../interfaces/IProductGenerator.h"
 #include "../interfaces/IOrderGenerator.h"
 #include "../interfaces/ISerializer.h"
+#include "../interfaces/ISalesReportGenerator.h"
 
 class Warehouse {
 private:
@@ -21,13 +22,16 @@ private:
     IProductGenerator& productGenerator;
     IOrderGenerator& orderGenerator;
     ISerializer& serializer;
+    ISalesReportGenerator& reportGenerator;
 
 public:
     Warehouse(IProductRepository &productRepository, IOrderRepository &orderRepository, IUI &ui,
-              IProductGenerator& productGenerator, IOrderGenerator& orderGenerator, ISerializer& serializer)
-    : productRepository(productRepository), orderRepository(orderRepository), ui(ui),
-    productGenerator(productGenerator), orderGenerator(orderGenerator), serializer(serializer)
-    {}
+              IProductGenerator &productGenerator, IOrderGenerator &orderGenerator, ISerializer &serializer,
+              ISalesReportGenerator &reportGenerator)
+              : productRepository(productRepository), orderRepository(orderRepository), ui(ui),
+              productGenerator(productGenerator), orderGenerator(orderGenerator), serializer(serializer),
+              reportGenerator(reportGenerator) {}
+
 
     void addProductToStock(const Product& product) {
         productRepository.addProduct(product);
@@ -175,8 +179,9 @@ public:
                     break;
                 }
                 case '8': {
-                    // TODO Genarating a sales report
-                    // generateSalesReport();
+                    system("cls");
+                    generateReport();
+                    system("pause");
                     break;
                 }
                 case '9': {
