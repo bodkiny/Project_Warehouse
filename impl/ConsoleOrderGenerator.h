@@ -10,7 +10,7 @@ public:
 
         std::cout << "=== Creating an order ===\n";
         std::cout << "Enter customer name: ";
-        std::cin >> customerName;
+        std::getline(std::cin, customerName);
 
         std::vector<Product> orderedProducts;
         orderGeneratorHelper(productsInStock, orderedProducts);

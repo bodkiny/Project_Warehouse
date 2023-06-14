@@ -17,7 +17,8 @@ public:
         std::cout << "Enter the product ID: ";
         std::cin >> productId;
         std::cout << "Enter the name of the product: ";
-        std::cin >> productName;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::getline(std::cin, productName);
         std::cout << "Enter the price of the product: ";
         std::cin >> price;
         std::cout << "Enter the quantity of the product: ";
