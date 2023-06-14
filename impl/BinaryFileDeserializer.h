@@ -32,12 +32,33 @@ public:
             warehouse.addOrder(order);
         }
 
+        std::vector<std::string> processedOrderIds = deserializeCsvSalesReportGenerator(inputFile);
+        warehouse.addProcessedOrderIds(processedOrderIds);
+
         Order::setOrderCounter(orderCount);
 
         inputFile.close();
     }
 
 private:
+    std::vector<std::string> deserializeCsvSalesReportGenerator(std::ifstream& inputFile)
+    {
+        std::vector<std::string> processedOrderIds;
+
+        // Restoring the storage of processed orders
+        size_t processedOrderIdsSize;
+        inputFile.read(reinterpret_cast<char*>(&processedOrderIdsSize), sizeof(processedOrderIdsSize));
+        for (size_t i = 0; i < processedOrderIdsSize; ++i) {
+            size_t orderIdSize;
+            inputFile.read(reinterpret_cast<char*>(&orderIdSize), sizeof(orderIdSize));
+            std::string orderId(orderIdSize, ' ');
+            inputFile.read(&orderId[0], orderIdSize);
+            processedOrderIds.push_back(orderId);
+        }
+
+        return processedOrderIds;
+    }
+
     Product loadProductFromFile(std::ifstream& inputFile) const {
         Product product;
         product.setProductId(loadStringFromFile(inputFile));

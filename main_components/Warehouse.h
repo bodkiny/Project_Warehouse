@@ -110,6 +110,18 @@ public:
         return orderGenerator.generateOrder(productsInStock);
     }
 
+    void generateReport(){
+        reportGenerator.generateReport(orderRepository.getAllOrders());
+    }
+
+    ISalesReportGenerator &getReportGenerator() const {
+        return reportGenerator;
+    }
+
+    void addProcessedOrderIds(const std::vector<std::string>& processedOrderIds){
+        reportGenerator.addProcessedOrderIds(processedOrderIds);
+    }
+
     void processUserInput(){
         bool exit = false;
 

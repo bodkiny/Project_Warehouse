@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include "../interfaces/ISerializer.h"
+#include "CsvSalesReportGenerator.h"
 
 class BinaryFileSerializer : public ISerializer {
 public:
@@ -30,10 +31,22 @@ public:
             serializeOrder(pair.second, outputFile);
         }
 
+        serializeCsvSalesReportGenerator(warehouse.getReportGenerator(), outputFile);
+
         outputFile.close();
     }
 
 private:
+    void serializeCsvSalesReportGenerator(ISalesReportGenerator& reportGenerator, std::ofstream& outputFile) {
+        size_t processedOrderIdsSize = reportGenerator.getProcessedOrderIds().size();
+        outputFile.write(reinterpret_cast<const char*>(&processedOrderIdsSize), sizeof(processedOrderIdsSize));
+        for (const std::string& orderId : reportGenerator.getProcessedOrderIds()) {
+            size_t orderIdSize = orderId.size();
+            outputFile.write(reinterpret_cast<const char*>(&orderIdSize), sizeof(orderIdSize));
+            outputFile.write(orderId.c_str(), orderIdSize);
+        }
+    }
+
     void serializeOrder(const Order& order, std::ofstream& outputFile) {
         saveStringToFile(order.getOrderId(), outputFile);
         saveStringToFile(order.getCustomerName(), outputFile);
