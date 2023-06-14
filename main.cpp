@@ -6,6 +6,7 @@
 #include "impl/ConsoleOrderGenerator.h"
 #include "impl/BinaryFileSerializer.h"
 #include "impl/BinaryFileDeserializer.h"
+#include "impl/CsvSalesReportGenerator.h"
 
 int main() {
 
@@ -16,6 +17,7 @@ int main() {
     ConsoleOrderGenerator consoleOrderGenerator;
     BinaryFileSerializer fileSerializer;
     BinaryFileDeserializer fileDeserializer;
+    CsvSalesReportGenerator reportGenerator;
 
 
     Warehouse warehouse(
@@ -24,7 +26,8 @@ int main() {
             ui,
             consoleProductGenerator,
             consoleOrderGenerator,
-            fileSerializer);
+            fileSerializer,
+            reportGenerator);
 
     fileDeserializer.deserialize(warehouse);
     warehouse.processUserInput();
